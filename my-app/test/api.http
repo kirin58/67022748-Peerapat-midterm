@@ -1,0 +1,69 @@
+//user
+###
+Get http://localhost:3000/api/users
+###
+Get http://localhost:3000/api/users/1
+###
+Get http://localhost:3000/api/users/999
+
+###
+//สร้าง user ใหม่ถูกต้อง
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "username" : "user01",
+    "password" : "user1234",
+    "firstname" : "user01firstname",
+    "lastname" : "user01lastname"
+}
+
+###
+//สร้าง user ไม่ใหม่ถูกต้อง
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "username" : "user01",
+    "firstname" : "user01firstname",
+    "lastname" : "user01lastname"
+}
+
+//role
+###
+Get http://localhost:3000/api/roles/1
+###
+Get http://localhost:3000/api/roles/99
+
+###
+//สร้าง user ไม่ใหม่ถูกต้อง
+POST http://localhost:3000/api/roles
+Content-Type: application/json
+{
+    "name" : "abc"
+}
+
+//lap crud
+//1
+###
+Get http://localhost:3000/api/roles
+
+###
+//สร้าง user ใหม่ถูกต้อง
+POST http://localhost:3000/api/roles
+Content-Type: application/json
+
+{
+    "name" : "employee"
+}
+
+###
+PUT http://localhost:3000/api/roles/1
+Content-Type: application/json
+
+{
+    "name" : "Trainee"
+}
+
+###
+DELETE http://localhost:3000/api/roles/1
