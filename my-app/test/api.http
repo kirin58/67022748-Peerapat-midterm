@@ -1,69 +1,49 @@
-//user
-###
-Get http://localhost:3000/api/users
-###
-Get http://localhost:3000/api/users/1
-###
-Get http://localhost:3000/api/users/999
+### ดึงข้อมูลใบแจ้งหนี้ทั้งหมด
+GET http://localhost:3000/api/invoices
 
-###
-//สร้าง user ใหม่ถูกต้อง
-POST http://localhost:3000/api/users
+### สร้างใบแจ้งหนี้ใหม่ (Success Case)
+POST http://localhost:3000/api/invoices
 Content-Type: application/json
 
 {
-    "username" : "user01",
-    "password" : "user1234",
-    "firstname" : "user01firstname",
-    "lastname" : "user01lastname"
+  "InvoiceDate": "2024-01-17",
+  "Amount": 5000.50,
+  "Status": "Pending",
+  "DueDate": "2024-02-17"
 }
 
-###
-//สร้าง user ไม่ใหม่ถูกต้อง
-POST http://localhost:3000/api/users
+### ทดสอบ Validation Error (ใส่วันที่ผิด)
+POST http://localhost:3000/api/invoices
 Content-Type: application/json
 
 {
-    "username" : "user01",
-    "firstname" : "user01firstname",
-    "lastname" : "user01lastname"
+  "InvoiceDate": "17-01-2024", 
+  "Amount": -100,
+  "Status": "",
+  "DueDate": "2024-02-17"
 }
 
-//role
-###
-Get http://localhost:3000/api/roles/1
-###
-Get http://localhost:3000/api/roles/99
+### GET BY ID: ดึงข้อมูลตาม ID (เปลี่ยนเลข 1 เป็น ID ที่มีจริง)
+GET http://localhost:3000/api/invoices/1
 
-###
-//สร้าง user ไม่ใหม่ถูกต้อง
-POST http://localhost:3000/api/roles
-Content-Type: application/json
-{
-    "name" : "abc"
-}
-
-//lap crud
-//1
-###
-Get http://localhost:3000/api/roles
-
-###
-//สร้าง user ใหม่ถูกต้อง
-POST http://localhost:3000/api/roles
+### PUT: แก้ไขข้อมูลทั้งหมด (Full Update)
+PUT http://localhost:3000/api/invoices/1
 Content-Type: application/json
 
 {
-    "name" : "employee"
+  "InvoiceDate": "2024-01-20",
+  "Amount": 7500.00,
+  "Status": "Paid",
+  "DueDate": "2024-02-20"
 }
 
-###
-PUT http://localhost:3000/api/roles/1
+### PATCH: แก้ไขบางฟิลด์ (Partial Update - แก้แค่ Status)
+PATCH http://localhost:3000/api/invoices/1
 Content-Type: application/json
 
 {
-    "name" : "Trainee"
+  "Status": "Overdue"
 }
 
-###
-DELETE http://localhost:3000/api/roles/1
+### DELETE: ลบข้อมูล
+DELETE http://localhost:3000/api/invoices/1
